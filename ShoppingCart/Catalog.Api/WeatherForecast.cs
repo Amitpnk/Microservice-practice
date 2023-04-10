@@ -1,4 +1,4 @@
-namespace Product
+namespace Catalog.Api
 {
     public class WeatherForecast
     {

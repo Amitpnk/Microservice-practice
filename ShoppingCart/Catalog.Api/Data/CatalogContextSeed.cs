@@ -1,11 +1,13 @@
-﻿using MongoDB.Driver;
-using Product.Entities;
+﻿using Catalog.API.Entities;
+using MongoDB.Driver;
+using System.Collections.Generic;
+using System.Linq;
 
-namespace Product.Data
+namespace Catalog.API.Data
 {
-    public class ProductContextSeed
+    public class CatalogContextSeed
     {
-        public static void SeedData(IMongoCollection<Products> productCollection)
+        public static void SeedData(IMongoCollection<Product> productCollection)
         {
             bool existProduct = productCollection.Find(p => true).Any();
             if (!existProduct)
@@ -14,67 +16,67 @@ namespace Product.Data
             }
         }
 
-        private static IEnumerable<Products> GetPreconfiguredProducts()
+        private static IEnumerable<Product> GetPreconfiguredProducts()
         {
-            return new List<Products>()
+            return new List<Product>()
             {
-                new Products()
+                new Product()
                 {
                     Id = "602d2149e773f2a3990b47f5",
                     Name = "IPhone X",
                     Summary = "This phone is the company's biggest change to its flagship smartphone in years. It includes a borderless.",
                     Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.",
-                    ImageFile = "Products-1.png",
+                    ImageFile = "product-1.png",
                     Price = 950.00M,
                     Category = "Smart Phone"
                 },
-                new Products()
+                new Product()
                 {
                     Id = "602d2149e773f2a3990b47f6",
                     Name = "Samsung 10",
                     Summary = "This phone is the company's biggest change to its flagship smartphone in years. It includes a borderless.",
                     Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.",
-                    ImageFile = "Products-2.png",
+                    ImageFile = "product-2.png",
                     Price = 840.00M,
                     Category = "Smart Phone"
                 },
-                new Products()
+                new Product()
                 {
                     Id = "602d2149e773f2a3990b47f7",
                     Name = "Huawei Plus",
                     Summary = "This phone is the company's biggest change to its flagship smartphone in years. It includes a borderless.",
                     Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.",
-                    ImageFile = "Products-3.png",
+                    ImageFile = "product-3.png",
                     Price = 650.00M,
                     Category = "White Appliances"
                 },
-                new Products()
+                new Product()
                 {
                     Id = "602d2149e773f2a3990b47f8",
                     Name = "Xiaomi Mi 9",
                     Summary = "This phone is the company's biggest change to its flagship smartphone in years. It includes a borderless.",
                     Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.",
-                    ImageFile = "Products-4.png",
+                    ImageFile = "product-4.png",
                     Price = 470.00M,
                     Category = "White Appliances"
                 },
-                new Products()
+                new Product()
                 {
                     Id = "602d2149e773f2a3990b47f9",
                     Name = "HTC U11+ Plus",
                     Summary = "This phone is the company's biggest change to its flagship smartphone in years. It includes a borderless.",
                     Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.",
-                    ImageFile = "Products-5.png",
+                    ImageFile = "product-5.png",
                     Price = 380.00M,
                     Category = "Smart Phone"
                 },
-                new Products()
+                new Product()
                 {
                     Id = "602d2149e773f2a3990b47fa",
                     Name = "LG G7 ThinQ",
                     Summary = "This phone is the company's biggest change to its flagship smartphone in years. It includes a borderless.",
                     Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.",
-                    ImageFile = "Products-6.png",
+                    ImageFile = "product-6.png",
                     Price = 240.00M,
                     Category = "Home Kitchen"
                 }
