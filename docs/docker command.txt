@@ -62,8 +62,13 @@ db.Products.insertMany(
 			])
 
 db.Products.find({}).pretty()
-db.Products.remove({})
+db.Products.deleteMany({})
 
 show databases
 show collections
 db.Products.find({}).pretty()
+
+
+
+
+docker run -d -p 3000:3000 mongoclient/mongoclient
