@@ -7,7 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catalog.Api", "Catalog.Api\
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{D461962F-395E-4B91-9776-3A28B174FC68}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basket.Api", "Basket.Api\Basket.Api.csproj", "{25880A85-A4B2-4918-B632-AFA86535E513}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basket.Api", "Basket.Api\Basket.Api.csproj", "{25880A85-A4B2-4918-B632-AFA86535E513}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Basket", "Basket", "{FAEF3910-7935-4F33-8E94-C26A12F310CC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Catalog", "Catalog", "{3A3A2E44-02EE-40BA-A5AD-CE0D06023FF9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{ED99908C-F5FF-41E0-A25E-BE973356363C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,6 +36,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3C8FFE45-8846-4CF9-BC68-7E35060B95E4} = {3A3A2E44-02EE-40BA-A5AD-CE0D06023FF9}
+		{25880A85-A4B2-4918-B632-AFA86535E513} = {FAEF3910-7935-4F33-8E94-C26A12F310CC}
+		{FAEF3910-7935-4F33-8E94-C26A12F310CC} = {ED99908C-F5FF-41E0-A25E-BE973356363C}
+		{3A3A2E44-02EE-40BA-A5AD-CE0D06023FF9} = {ED99908C-F5FF-41E0-A25E-BE973356363C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1D1F890F-7CAE-48D8-8B79-FCB12921264F}
