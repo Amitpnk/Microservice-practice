@@ -24,7 +24,7 @@ namespace Discount.Api.Repositories
             using var connection = new NpgsqlConnection(_configuration.GetValue<string>("DatabaseSettings:ConnectionString"));
 
             var coupon = await connection.QueryFirstOrDefaultAsync<Coupon>
-                ("SELECT * FROM public.coupon");// WHERE ProductName = @ProductName", new { ProductName = productName });
+                ("SELECT * FROM public.coupon WHERE ProductName = @ProductName", new { ProductName = productName });
 
             if (coupon == null)
                 return new Coupon { ProductName = "No Discount", Amount = 0, Description = "No Discount Desc" };
