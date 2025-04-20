@@ -22,13 +22,13 @@ dotnet tool install --global dotnet-ef --version="9.0"
 To add a new migration, use the following command. Replace `Init` with the desired migration name:
 
 ```sh
-dotnet ef migrations add Init -context ShoppingBasketDbContext -o Migrations/ShoppingBasketDb
+dotnet ef migrations add Init -context EventCatalogDbContext -o Migrations/ShoppingBasketDb
 ```
 
 ### Generate a Migration Script
 To generate a SQL script for the migrations, use:
 ```sh
-dotnet ef migrations script --context ShoppingBasketDbContext
+dotnet ef migrations script --context EventCatalogDbContext
 ```
 
 ### Updating the Database
@@ -37,7 +37,7 @@ dotnet ef migrations script --context ShoppingBasketDbContext
 To apply the migrations to the database, use:
 
 ```sh
-dotnet ef database update --context ShoppingBasketDbContext
+dotnet ef database update --context EventCatalogDbContext
 ```
 
 ## Package Manager Console
@@ -47,7 +47,7 @@ To add a new migration using the Package Manager Console, use the following comm
 
 
 ```sh
-add-migration Initial-commit-Event -Context ShoppingBasketDbContext -o Migrations/ShoppingBasketDb
+add-migration Initial-commit-Event -Context EventCatalogDbContext -o Migrations/ShoppingBasketDb
 ```
 
 
@@ -55,12 +55,12 @@ add-migration Initial-commit-Event -Context ShoppingBasketDbContext -o Migration
 To generate a SQL script for the migrations, use:
 
 ```sh
-Script-Migration -Context ShoppingBasketDbContext
+Script-Migration -Context EventCatalogDbContext
 ```
 
 ### Apply Migrations to the Database
 To apply the migrations to the database, use:
 
 ```sh
-Update-Database -Context ShoppingBasketDbContext
+Update-Database -Context EventCatalogDbContext
 ```
