@@ -1,0 +1,10 @@
+@Eventick.Services.EventtCatalog_HostAddress = http://localhost:5012
+
+GET {{Eventick.Services.EventtCatalog_HostAddress}}/Category/
+
+GET {{Eventick.Services.EventtCatalog_HostAddress}}/Event/
+
+
+Accept: application/json
+
+###
