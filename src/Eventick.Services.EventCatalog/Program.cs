@@ -7,18 +7,19 @@ using Scalar.AspNetCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+var services = builder.Services;
 
-builder.Services.AddDbContext<EventCatalogDbContext>(options =>
+services.AddDbContext<EventCatalogDbContext>(options =>
               options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
-builder.Services.AddScoped<IEventRepository, EventRepository>();
+services.AddScoped<ICategoryRepository, CategoryRepository>();
+services.AddScoped<IEventRepository, EventRepository>();
 
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-builder.Services.AddSwaggerGen();
+services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+services.AddSwaggerGen();
 
-builder.Services.AddControllers();
-builder.Services.AddOpenApi();
+services.AddControllers();
+services.AddOpenApi();
 
 var app = builder.Build();
 

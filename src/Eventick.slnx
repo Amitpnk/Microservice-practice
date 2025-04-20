@@ -1,8 +1,7 @@
 <Solution>
-  <Folder Name="/Frontends/" Id="8eeb7ac4-5807-4e1f-abd0-c46d54304fd1">
-    <Project Path="Eventick.Web/Eventick.Web.csproj" Id="135445a5-6d15-4f0c-9572-f51df2ea492d" />
-  </Folder>
+  <Folder Name="/Frontends/" Id="8eeb7ac4-5807-4e1f-abd0-c46d54304fd1" />
   <Folder Name="/Services/" Id="02ea681e-c7d8-13c7-8484-4ac65e1b71e8">
     <Project Path="Eventick.Services.EventCatalog/Eventick.Services.EventCatalog.csproj" Id="778bfd0b-1cfa-4126-a74d-8dbda83b2e16" />
+    <Project Path="Eventick.Services.ShoppingBasket/Eventick.Services.ShoppingBasket.csproj" Id="bc8c1925-dba2-4709-9913-051ceccf2036" />
   </Folder>
 </Solution>
