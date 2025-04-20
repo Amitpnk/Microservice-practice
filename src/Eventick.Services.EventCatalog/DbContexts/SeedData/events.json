@@ -1,0 +1,32 @@
+[
+  {
+    "EventId": "CFB88E29-4744-48C0-94FA-B25B92DEA317",
+    "Name": "John Egbert Live",
+    "Price": 65,
+    "Artist": "John Egbert",
+    "Date": "2025-10-01T00:00:00",
+    "Description": "Join John for his farewell tour across 15 continents. John really needs no introduction since he has already mesmerized the world with his banjo.",
+    "ImageUrl": "/img/banjo.jpg",
+    "CategoryId": "CFB88E29-4744-48C0-94FA-B25B92DEA314"
+  },
+  {
+    "EventId": "CFB88E29-4744-48C0-94FA-B25B92DEA319",
+    "Name": "The State of Affairs: Michael Live!",
+    "Price": 85,
+    "Artist": "Michael Johnson",
+    "Date": "2026-01-01T00:00:00",
+    "Description": "Michael Johnson doesn't need an introduction. His 25 concerts across the globe last year were seen by thousands. Can we add you to the list?",
+    "ImageUrl": "/img/michael.jpg",
+    "CategoryId": "CFB88E29-4744-48C0-94FA-B25B92DEA314"
+  },
+  {
+    "EventId": "CFB88E29-4744-48C0-94FA-B25B92DEA318",
+    "Name": "To the Moon and Back",
+    "Price": 135,
+    "Artist": "Nick Sailor",
+    "Date": "2025-12-01T00:00:00",
+    "Description": "The critics are over the moon and so will you after you've watched this sing and dance extravaganza written by Nick Sailor, the man from 'My dad and sister'.",
+    "ImageUrl": "/img/musical.jpg",
+    "CategoryId": "CFB88E29-4744-48C0-94FA-B25B92DEA315"
+  }
+]

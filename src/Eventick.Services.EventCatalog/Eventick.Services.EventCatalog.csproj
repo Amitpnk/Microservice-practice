@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
-    <Nullable>enable</Nullable>
+    <Nullable>diable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
  
@@ -19,6 +19,15 @@
     <PackageReference Include="Polly" Version="8.5.2" />
     <PackageReference Include="Scalar.AspNetCore" Version="2.1.17" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="8.1.1" />
+  </ItemGroup>
+ 
+  <ItemGroup>
+    <Content Update="DbContexts\SeedData\categories.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="DbContexts\SeedData\events.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>
