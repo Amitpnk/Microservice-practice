@@ -1,0 +1,9 @@
+{
+  "solution": {
+    "path": "Eventick.sln",
+    "projects": [
+      "Eventick.Services.EventCatalog\\Eventick.Services.EventCatalog.csproj",
+      "Eventick.Services.ShoppingBasket\\Eventick.Services.ShoppingBasket.csproj"
+    ]
+  }
+}
