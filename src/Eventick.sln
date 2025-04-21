@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontends", "Frontends", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{47AFE0B8-52A9-44F3-BC33-E1328D763FA7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eventick.Services.Discount", "Eventick.Services.Discount\Eventick.Services.Discount.csproj", "{EA8A036B-60F2-43B0-8FBC-03578AD97993}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,9 +26,18 @@ Global
 		{73B32B79-CC43-D68C-7981-A138D8ACA0B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73B32B79-CC43-D68C-7981-A138D8ACA0B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{73B32B79-CC43-D68C-7981-A138D8ACA0B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA8A036B-60F2-43B0-8FBC-03578AD97993}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA8A036B-60F2-43B0-8FBC-03578AD97993}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA8A036B-60F2-43B0-8FBC-03578AD97993}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA8A036B-60F2-43B0-8FBC-03578AD97993}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1B0C20A6-DA8D-B01A-17DD-6CC79D776D9D} = {47AFE0B8-52A9-44F3-BC33-E1328D763FA7}
+		{73B32B79-CC43-D68C-7981-A138D8ACA0B8} = {47AFE0B8-52A9-44F3-BC33-E1328D763FA7}
+		{EA8A036B-60F2-43B0-8FBC-03578AD97993} = {47AFE0B8-52A9-44F3-BC33-E1328D763FA7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5719889A-D0AD-4520-804C-CE0B79AA2804}

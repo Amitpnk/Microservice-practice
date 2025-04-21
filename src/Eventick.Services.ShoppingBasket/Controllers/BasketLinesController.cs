@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Eventick.Services.ShoppingBasket.Models;
 using Eventick.Services.ShoppingBasket.Repositories;
 using Eventick.Services.ShoppingBasket.Services;

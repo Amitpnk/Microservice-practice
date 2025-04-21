@@ -1,6 +1,10 @@
 <Solution>
   <Folder Name="/Frontends/" />
+  <Folder Name="/Proto/">
+    <File Path="discount.proto" />
+  </Folder>
   <Folder Name="/Services/">
+    <Project Path="Eventick.Services.Discount/Eventick.Services.Discount.csproj" />
     <Project Path="Eventick.Services.EventCatalog/Eventick.Services.EventCatalog.csproj" />
     <Project Path="Eventick.Services.ShoppingBasket/Eventick.Services.ShoppingBasket.csproj" />
   </Folder>
