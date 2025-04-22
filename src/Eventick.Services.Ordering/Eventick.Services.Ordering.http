@@ -1,0 +1,6 @@
+@Eventick.Services.Ordering_HostAddress = http://localhost:5232
+
+GET {{Eventick.Services.Ordering_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
