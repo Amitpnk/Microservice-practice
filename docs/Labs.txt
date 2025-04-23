@@ -1,0 +1,41 @@
+Lab 1 
+    Event catalog api
+    
+Lab 2
+    ShoppingBasket api
+    web
+
+/labs
+  /lab1-event-catalog api
+  /lab2-shopping basket api
+  /lab3-discount service
+  /lab4-sync communication (discount and basket using grpc)
+  /lab5-ordering service
+  /lab6-Async communication (service bus with ordering service)
+  /lab7-api gateway 
+  /lab8-web application (client)
+  /lab7-Async communication (background service)
+  /lab9-securing
+  /lab10-versioning
+  /lab11-fastapi-ml
+  /lab12-dockerization
+  /lab13-kubernetes-deploy
+  /...
+
+
+
+/labs
+  /lab1-intro-ai-microservices
+  /lab2-architecture-patterns
+  /lab3-ml-basics
+  /lab4-setup-environment
+  /lab5-product-service
+  /lab6-fastapi-ml
+  /lab7-dotnet-call-ai
+  /lab8-dockerization
+  /lab9-kubernetes-deploy
+  /lab10-observability
+  /lab11-cicd
+  /lab12-real-world-usecase
+  /lab13-system-design
+  /lab14-langchain-exploration
