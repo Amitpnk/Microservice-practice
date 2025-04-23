@@ -1,80 +1,88 @@
-﻿using Eventick.Integration.MessagingBus;
+﻿using Azure.Messaging.ServiceBus;
+using Eventick.Integration.MessagingBus;
 using Eventick.Services.Payment.Messages;
 using Eventick.Services.Payment.Model;
 using Eventick.Services.Payment.Services;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using System;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Eventick.Integration.Messages;
 
 namespace Eventick.Services.Payment.Worker
 {
-    public class ServiceBusListener : IHostedService, IDisposable,IMessageBus
+    public class ServiceBusListener : IHostedService, IDisposable
     {
-        private readonly ILogger logger;
-        private readonly IConfiguration configuration;
-        private ISubscriptionClient subscriptionClient;
-        private readonly IExternalGatewayPaymentService externalGatewayPaymentService;
-        private readonly IMessageBus messageBus;
-        private readonly string orderPaymentUpdatedMessageTopic;
+        private readonly ILogger<ServiceBusListener> _logger;
+        private readonly IConfiguration _configuration;
+        private ServiceBusProcessor _processor;
+        private readonly IExternalGatewayPaymentService _externalGatewayPaymentService;
+        private readonly IMessageBus _messageBus;
+        private readonly string _orderPaymentUpdatedMessageTopic;
+        private ServiceBusClient _client;
 
-        public ServiceBusListener(IConfiguration configuration, ILoggerFactory loggerFactory, IExternalGatewayPaymentService externalGatewayPaymentService, IMessageBus messageBus)
+        public ServiceBusListener(
+            IConfiguration configuration,
+            ILoggerFactory loggerFactory,
+            IExternalGatewayPaymentService externalGatewayPaymentService,
+            IMessageBus messageBus)
         {
-            logger = loggerFactory.CreateLogger<ServiceBusListener>();
-            orderPaymentUpdatedMessageTopic = configuration.GetValue<string>("OrderPaymentUpdatedMessageTopic");
+            _logger = loggerFactory.CreateLogger<ServiceBusListener>();
+            _orderPaymentUpdatedMessageTopic = configuration.GetValue<string>("OrderPaymentUpdatedMessageTopic");
 
-            this.configuration = configuration;
-            this.externalGatewayPaymentService = externalGatewayPaymentService;
-            this.messageBus = messageBus;
+            _configuration = configuration;
+            _externalGatewayPaymentService = externalGatewayPaymentService;
+            _messageBus = messageBus;
         }
 
-        public Task StartAsync(CancellationToken cancellationToken)
+        public async Task StartAsync(CancellationToken cancellationToken)
         {
-            subscriptionClient = new SubscriptionClient(
-                configuration.GetValue<string>("ServiceBusConnectionString"),
-                configuration.GetValue<string>("OrderPaymentRequestMessageTopic"),
-                configuration.GetValue<string>("subscriptionName"));
+            var connectionString = _configuration.GetValue<string>("ServiceBusConnectionString");
+            var topicName = _configuration.GetValue<string>("OrderPaymentRequestMessageTopic");
+            var subscriptionName = _configuration.GetValue<string>("subscriptionName");
 
-            var messageHandlerOptions = new MessageHandlerOptions(e =>
-            {
-                ProcessError(e.Exception);
-                return Task.CompletedTask;
-            })
+            _client = new ServiceBusClient(connectionString);
+            _processor = _client.CreateProcessor(topicName, subscriptionName, new ServiceBusProcessorOptions
             {
                 MaxConcurrentCalls = 3,
-                AutoComplete = false
-            };
+                AutoCompleteMessages = false
+            });
 
-            subscriptionClient.RegisterMessageHandler(ProcessMessageAsync, messageHandlerOptions);
+            _processor.ProcessMessageAsync += ProcessMessageAsync;
+            _processor.ProcessErrorAsync += ProcessErrorAsync;
 
-            return Task.CompletedTask;
+            await _processor.StartProcessingAsync(cancellationToken);
+
+            _logger.LogInformation("ServiceBusListener started.");
         }
 
         public async Task StopAsync(CancellationToken cancellationToken)
         {
-            logger.LogDebug("ServiceBusListener stopping.");
-            if (subscriptionClient != null)
+            _logger.LogInformation("ServiceBusListener stopping.");
+
+            if (_processor != null)
             {
-                await subscriptionClient.CloseAsync();
+                await _processor.CloseAsync(cancellationToken);
+                _processor.ProcessMessageAsync -= ProcessMessageAsync;
+                _processor.ProcessErrorAsync -= ProcessErrorAsync;
+            }
+
+            if (_client != null)
+            {
+                await _client.DisposeAsync();
             }
         }
 
-        protected void ProcessError(Exception e)
+        private Task ProcessErrorAsync(ProcessErrorEventArgs args)
         {
-            logger.LogError(e, "Error while processing queue item in ServiceBusListener.");
+            _logger.LogError(args.Exception, "Error while processing queue item in ServiceBusListener.");
+            return Task.CompletedTask;
         }
 
-        protected async Task ProcessMessageAsync(Message message, CancellationToken token)
+        private async Task ProcessMessageAsync(ProcessMessageEventArgs args)
         {
             try
             {
-                var messageBody = Encoding.UTF8.GetString(message.Body);
+                var messageBody = args.Message.Body.ToString();
                 var orderPaymentRequestMessage = JsonConvert.DeserializeObject<OrderPaymentRequestMessage>(messageBody);
+
+                _logger.LogInformation("Processing message with OrderId: {OrderId}", orderPaymentRequestMessage.OrderId);
 
                 PaymentInfo paymentInfo = new PaymentInfo
                 {
@@ -84,38 +92,39 @@ namespace Eventick.Services.Payment.Worker
                     Total = orderPaymentRequestMessage.Total
                 };
 
-                var result = await externalGatewayPaymentService.PerformPayment(paymentInfo);
+                var result = await _externalGatewayPaymentService.PerformPayment(paymentInfo);
 
-                await subscriptionClient.CompleteAsync(message.SystemProperties.LockToken);
+                await args.CompleteMessageAsync(args.Message);
 
-                // Send payment result to order service via service bus
                 var orderPaymentUpdateMessage = new OrderPaymentUpdateMessage
                 {
                     PaymentSuccess = result,
                     OrderId = orderPaymentRequestMessage.OrderId
                 };
 
-                await messageBus.PublishMessage(orderPaymentUpdateMessage, orderPaymentUpdatedMessageTopic);
+                await _messageBus.PublishMessage(orderPaymentUpdateMessage, _orderPaymentUpdatedMessageTopic);
 
-                logger.LogDebug($"{orderPaymentRequestMessage.OrderId}: ServiceBusListener processed item successfully.");
+                _logger.LogInformation("Message with OrderId: {OrderId} processed successfully.", orderPaymentRequestMessage.OrderId);
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "Error processing message.");
-                // Optionally abandon the message to allow retries
-                await subscriptionClient.AbandonAsync(message.SystemProperties.LockToken);
+                _logger.LogError(ex, "Error processing message. Abandoning message.");
+                await args.AbandonMessageAsync(args.Message);
             }
         }
 
         public void Dispose()
         {
-            subscriptionClient?.CloseAsync().GetAwaiter().GetResult();
-            subscriptionClient = null;
-        }
+            if (_processor != null)
+            {
+                _processor.CloseAsync().GetAwaiter().GetResult();
+                _processor.DisposeAsync().GetAwaiter().GetResult();
+            }
 
-        public Task PublishMessage(IntegrationBaseMessage message, string topicName)
-        {
-            throw new NotImplementedException();
+            if (_client != null)
+            {
+                _client.DisposeAsync().GetAwaiter().GetResult();
+            }
         }
     }
 }

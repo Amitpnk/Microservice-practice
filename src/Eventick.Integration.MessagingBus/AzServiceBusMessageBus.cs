@@ -1,53 +1,74 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure.Messaging.ServiceBus;
 using Eventick.Integration.Messages;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace Eventick.Integration.MessagingBus
 {
-    public class AzServiceBusMessageBus : IMessageBus
+    public class ServiceBusSettings
     {
-        private readonly string connectionString;
+        public const string SectionName = "ServiceBus";
+        public string ConnectionString { get; set; }
+    }
 
-        public AzServiceBusMessageBus()
+    public class AzServiceBusMessageBus : IMessageBus, IAsyncDisposable
+    {
+        private readonly ServiceBusClient _client;
+        private readonly ILogger<AzServiceBusMessageBus> _logger;
+
+        public AzServiceBusMessageBus(
+            IOptions<ServiceBusSettings> serviceBusSettings,
+            ILogger<AzServiceBusMessageBus> logger)
         {
-            // Read connection string from configuration (e.g., appsettings.json or environment variables)
-            connectionString = Environment.GetEnvironmentVariable("ServiceBusConnectionString")
-                               ?? throw new InvalidOperationException("Service Bus connection string is not configured.");
+            if (string.IsNullOrWhiteSpace(serviceBusSettings.Value.ConnectionString))
+            {
+                throw new ArgumentException("Service Bus connection string is not configured.", nameof(serviceBusSettings));
+            }
+
+            _client = new ServiceBusClient(serviceBusSettings.Value.ConnectionString);
+            _logger = logger;
         }
 
         public async Task PublishMessage(IntegrationBaseMessage message, string topicName)
         {
-            // Create a ServiceBusClient
-            await using var client = new ServiceBusClient(connectionString);
+            if (message == null)
+            {
+                throw new ArgumentNullException(nameof(message));
+            }
 
-            // Create a sender for the topic
-            ServiceBusSender sender = client.CreateSender(topicName);
+            if (string.IsNullOrWhiteSpace(topicName))
+            {
+                throw new ArgumentException("Topic name cannot be null or empty.", nameof(topicName));
+            }
+
+            await using var sender = _client.CreateSender(topicName);
 
             try
             {
-                // Serialize the message to JSON
                 var jsonMessage = JsonSerializer.Serialize(message);
-
-                // Create a ServiceBusMessage
                 var serviceBusMessage = new ServiceBusMessage(Encoding.UTF8.GetBytes(jsonMessage))
                 {
-                    CorrelationId = Guid.NewGuid().ToString()
+                    CorrelationId = Guid.NewGuid().ToString(),
+                    ContentType = "application/json"
                 };
 
-                // Send the message
                 await sender.SendMessageAsync(serviceBusMessage);
-                Console.WriteLine($"Sent message to topic: {topicName}");
+                _logger.LogInformation("Message sent to topic {TopicName}", topicName);
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error sending message: {ex.Message}");
+                _logger.LogError(ex, "Error sending message to topic {TopicName}", topicName);
                 throw;
             }
+        }
+
+        public async ValueTask DisposeAsync()
+        {
+            await _client.DisposeAsync();
         }
     }
 }
