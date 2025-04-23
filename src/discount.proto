@@ -16,7 +16,6 @@ message GetCouponByIdResponse {
 	Coupon coupon = 1;
 }
 
-
 message Coupon {
 	string CouponId = 1;
 	string Code = 2;
