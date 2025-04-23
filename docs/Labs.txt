@@ -12,9 +12,9 @@ Lab 2
   /lab4-sync communication (discount and basket using grpc)
   /lab5-ordering service
   /lab6-Async communication (service bus with ordering service)
-  /lab7-api gateway 
-  /lab8-web application (client)
-  /lab7-Async communication (background service)
+       -Async communication (background service payment gateway and marketing service)
+  /lab8-api gateway 
+  /lab9-web application (client)
   /lab9-securing
   /lab10-versioning
   /lab11-fastapi-ml
