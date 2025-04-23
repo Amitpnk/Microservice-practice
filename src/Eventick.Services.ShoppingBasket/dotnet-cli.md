@@ -22,7 +22,7 @@ dotnet tool install --global dotnet-ef --version="9.0"
 To add a new migration, use the following command. Replace `Init` with the desired migration name:
 
 ```sh
-dotnet ef migrations add Init -context ShoppingBasketDbContext -o Migrations/ShoppingBasketDb
+dotnet ef migrations add Init --context ShoppingBasketDbContext -o Migrations/ShoppingBasketDb
 ```
 
 ### Generate a Migration Script

@@ -1,8 +1,10 @@
+using Eventick.Integration.MessagingBus;
 using Eventick.Services.Ordering.DbContexts;
 using Eventick.Services.Ordering.Messaging;
 using Eventick.Services.Ordering.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 var services= builder.Services;
@@ -38,10 +40,20 @@ builder.Services.AddOpenApi();
 
 var app = builder.Build();
 
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<OrderDbContext>();
+    dbContext.Database.Migrate();
+}
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+    app.MapScalarApiReference();
+
+    app.UseSwagger();
+    app.UseSwaggerUI(options => options.SwaggerEndpoint("/openapi/v1.json", "Swagger"));
 }
 
 app.UseHttpsRedirection();
