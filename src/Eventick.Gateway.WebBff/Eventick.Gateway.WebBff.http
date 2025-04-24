@@ -1,0 +1,6 @@
+@Eventick.Gateway.WebBff_HostAddress = http://localhost:5020
+
+GET {{Eventick.Gateway.WebBff_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
