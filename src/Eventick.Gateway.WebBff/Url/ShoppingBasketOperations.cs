@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
-namespace Eventick.Gateway.WebBff.Url
+namespace Eventick.Gateway.WebBff.Url;
+
+public class ShoppingBasketOperations
 {
-    public class ShoppingBasketOperations
-    {
-    }
 }

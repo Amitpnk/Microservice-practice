@@ -1,6 +1,5 @@
-﻿namespace Eventick.Gateway.WebBff.Url
+namespace Eventick.Gateway.WebBff.Url;
+
+public class MarketingOperations
 {
-    public class MarketingOperations
-    {
-    }
 }
