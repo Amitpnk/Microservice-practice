@@ -7,3 +7,11 @@ az bicep version
 ```
 az bicep install
 ```
+
+
+```
+az deployment group create \
+  --resource-group rg-eventick-dev-001 \
+  --template-file servicebus.bicep \
+  --parameters environment=dev projectName=eventick 
+```
