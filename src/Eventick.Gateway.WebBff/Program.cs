@@ -1,5 +1,6 @@
 using Eventick.Gateway.WebBff.Services;
 using Eventick.Gateway.WebBff.Url;
+using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
