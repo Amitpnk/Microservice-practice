@@ -12,6 +12,6 @@ az bicep install
 ```
 az deployment group create \
   --resource-group rg-eventick-dev-001 \
-  --template-file servicebus.bicep \
+  --template-file main.bicep \
   --parameters environment=dev projectName=eventick 
 ```
