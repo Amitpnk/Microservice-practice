@@ -1,0 +1,57 @@
+---
+- name: Deploy Azure Service Bus with Topics for Eventick
+  hosts: localhost
+  connection: local
+  vars:
+    resource_group: "rg-eventick-dev-001"
+    location: "eastus2"
+    service_bus_name: "sb-eventick-dev-001"
+    project_name: "Eventick"
+    environment: "dev"
+    topics:
+      - name: "checkoutmessage"
+      - name: "orderpaymentrequestmessage"
+      - name: "orderpaymentupdatedmessage"
+    
+  tasks:
+    - name: Ensure resource group exists
+      azure_rm_resourcegroup:
+        name: "{{ resource_group }}"
+        location: "{{ location }}"
+        tags:
+          Project: "{{ project_name }}"
+          Environment: "{{ environment }}"
+    
+    - name: Create Service Bus namespace
+      azure_rm_servicebus:
+        resource_group: "{{ resource_group }}"
+        name: "{{ service_bus_name }}"
+        location: "{{ location }}"
+        sku: "Standard"
+        tags:
+          Project: "{{ project_name }}"
+          Environment: "{{ environment }}"
+          Deployment: "Ansible"
+      register: service_bus
+    
+    - name: Create Service Bus topics
+      azure_rm_servicebustopic:
+        resource_group: "{{ resource_group }}"
+        namespace: "{{ service_bus_name }}"
+        name: "{{ item.name }}"
+        default_message_time_to_live: "P14D"  # 14 days
+        enable_duplicate_detection: true
+        duplicate_detection_history_time_window: "PT10M"  # 10 minutes
+      loop: "{{ topics }}"
+    
+    - name: Get Service Bus connection string
+      azure_rm_servicebus:
+        resource_group: "{{ resource_group }}"
+        name: "{{ service_bus_name }}"
+        show_connection_string: true
+      register: connection_info
+    
+    - name: Display connection string (for debugging)
+      debug:
+        msg: "Service Bus connection string: {{ connection_info.connection_string }}"
+      when: connection_info.connection_string is defined
