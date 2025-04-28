@@ -1,3 +1,7 @@
+```
+winget install -e --id Microsoft.AzureCLI
+```
+
 - Login Azure
 ```
 az login
