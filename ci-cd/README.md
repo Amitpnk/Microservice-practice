@@ -16,7 +16,7 @@ az group create --name rg-eventick-dev-001 --location eastus2 --tags 'Project=Ev
 az consumption budget create --amount 100 --time-grain Monthly --start-date $(date +%Y-%m-01) --end-date 2025-12-31 --category Cost --resource-group rg-eventick-dev-001 --budget-name "Eventick Dev Monthly Budget"
 ```
 
-Create Service Bus Name Space
+- Create Service Bus Name Space
 ```
 az servicebus namespace create \
   --name sb-eventick-dev-001 \
@@ -26,7 +26,7 @@ az servicebus namespace create \
   --tags 'Project=Eventick' 'Environment=Development'
 ```
 
-Create Service Bus Topics
+- Create Service Bus Topics
 
 ```
 # Create checkoutmessage topic
@@ -57,6 +57,26 @@ az servicebus topic create \
   --duplicate-detection-history-time-window PT10M
 ```
 
+- Create Subscriptions for Topics
+```
+az servicebus topic subscription create \
+  --resource-group rg-eventick-dev-001 \
+  --namespace-name sb-eventick-dev-001 \
+  --topic-name checkoutmessage \
+  --name sbCheckoutMessageSubscription
+
+az servicebus topic subscription create \
+  --resource-group rg-eventick-dev-001 \
+  --namespace-name sb-eventick-dev-001 \
+  --topic-name orderpaymentrequestmessage \
+  --name sbOrderPaymentRequestSubscription 
+
+az servicebus topic subscription create \
+  --resource-group rg-eventick-dev-001 \
+  --namespace-name sb-eventick-dev-001 \
+  --topic-name orderpaymentupdatedmessage \
+  --name sbOrderPaymentUpdatedSubscription
+```
 Verification Commands
 ```
 az servicebus topic list --namespace-name sb-eventick-dev-001 --resource-group rg-eventick-dev-001
