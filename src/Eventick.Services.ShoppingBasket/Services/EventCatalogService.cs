@@ -18,7 +18,7 @@ namespace Eventick.Services.ShoppingBasket.Services
         public async Task<Event> GetEvent(Guid id)
         {
             //todo: ihttpclientfactory
-            var response = await client.GetAsync($"/api/events/{id}");
+            var response = await client.GetAsync($"/api/event/{id}");
             return await response.ReadContentAs<Event>();
         }
     }

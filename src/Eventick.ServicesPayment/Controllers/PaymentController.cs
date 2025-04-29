@@ -8,7 +8,7 @@ namespace Eventick.Services.Payment.Controllers
 {
     [ApiController]
     [Route("api/payment")]
-    public class PaymentController : Controller
+    public class PaymentController : ControllerBase
     {
         public IActionResult Index()
         {

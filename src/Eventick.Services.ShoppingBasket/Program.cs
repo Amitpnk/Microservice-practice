@@ -1,3 +1,4 @@
+using Eventick.Integration.MessagingBus;
 using Eventick.Services.ShoppingBasket.DbContexts;
 using Eventick.Services.ShoppingBasket.Repositories;
 using Eventick.Services.ShoppingBasket.Services;
@@ -14,6 +15,8 @@ services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 services.AddScoped<IBasketRepository, BasketRepository>();
 services.AddScoped<IBasketLinesRepository, BasketLinesRepository>();
 services.AddScoped<IEventRepository, EventRepository>();
+services.AddScoped<IMessageBus, AzServiceBusMessageBus>();
+
 services.AddHttpClient<IEventCatalogService, EventCatalogService>(c =>
             c.BaseAddress = new Uri(builder.Configuration["ApiConfigs:EventCatalog:Uri"]));
 

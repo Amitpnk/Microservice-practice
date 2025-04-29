@@ -2,8 +2,17 @@
   "solution": {
     "path": "Eventick.sln",
     "projects": [
+      "Eventick.Gateway.Shared\\Eventick.Gateway.Shared.csproj",
+      "Eventick.Gateway.WebBff\\Eventick.Gateway.WebBff.csproj",
+      "Eventick.Integration.Messages\\Eventick.Integration.Messages.csproj",
+      "Eventick.Integration.MessagingBus\\Eventick.Integration.MessagingBus.csproj",
+      "Eventick.Services.Discount\\Eventick.Services.Discount.csproj",
       "Eventick.Services.EventCatalog\\Eventick.Services.EventCatalog.csproj",
-      "Eventick.Services.ShoppingBasket\\Eventick.Services.ShoppingBasket.csproj"
+      "Eventick.Services.Marketing\\Eventick.Services.Marketing.csproj",
+      "Eventick.Services.Ordering\\Eventick.Services.Ordering.csproj",
+      "Eventick.Services.ShoppingBasket\\Eventick.Services.ShoppingBasket.csproj",
+      "Eventick.ServicesPayment\\Eventick.ServicesPayment.csproj",
+      "Eventick.Web\\Eventick.Web.csproj"
     ]
   }
 }

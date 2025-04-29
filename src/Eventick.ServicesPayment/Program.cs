@@ -12,7 +12,7 @@ services.AddHttpClient<IExternalGatewayPaymentService, ExternalGatewayPaymentSer
 
 services.AddSingleton<IMessageBus, AzServiceBusMessageBus>();
 
-
+services.AddSwaggerGen();
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();

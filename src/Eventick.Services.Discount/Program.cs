@@ -1,5 +1,6 @@
 using Eventick.Services.Discount.DbContexts;
 using Eventick.Services.Discount.Repositories;
+using Eventick.Services.Discount.Services;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
 
@@ -14,6 +15,7 @@ services.AddDbContext<DiscountDbContext>(options =>
 services.AddScoped<ICouponRepository, CouponRepository>();
 
 services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddSwaggerGen();
 
 services.AddControllers();
 services.AddGrpc();
@@ -46,5 +48,5 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
-
+app.MapGrpcService<DiscountsService>();
 app.Run();

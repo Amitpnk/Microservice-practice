@@ -11,7 +11,7 @@ namespace Eventick.Services.ShoppingBasket.Repositories
         Task<Basket> GetBasketById(Guid basketId);
 
         void AddBasket(Basket basket);
-
+        Task ClearBasket(Guid basketId);
         Task<bool> SaveChanges();
     }
 }

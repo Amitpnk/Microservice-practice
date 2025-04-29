@@ -1,0 +1,20 @@
+[
+  {
+    "CouponId": "00000000-0000-0000-0000-000000000001",
+    "Code": "BeNice",
+    "Amount": 10,
+    "AlreadyUsed": false
+  },
+  {
+    "CouponId": "00000000-0000-0000-0000-000000000002",
+    "Code": "Awesome",
+    "Amount": 20,
+    "AlreadyUsed": false
+  },
+  {
+    "CouponId": "00000000-0000-0000-0000-000000000003",
+    "Code": "AlmostFree",
+    "Amount": 100,
+    "AlreadyUsed": false
+  }
+]

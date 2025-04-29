@@ -27,6 +27,7 @@ services.AddHttpClient<IDiscountService, DiscountService>(c =>
 services.AddHttpClient<IOrderService, OrderService>(c =>
     c.BaseAddress = new Uri(configuration["ServiceUrls:Ordering"]));
 
+builder.Services.AddSwaggerGen();
 
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
