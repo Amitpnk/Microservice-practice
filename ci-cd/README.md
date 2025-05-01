@@ -96,3 +96,8 @@ az servicebus namespace authorization-rule keys list \
   --query primaryConnectionString \
   --output tsv
 ```
+
+
+
+-- Clean Up
+az group delete --name rg-eventick-dev-001 --yes
