@@ -29,7 +29,7 @@ services.AddSwaggerGen();
 services.AddControllers();
 
 services.AddOpenApi();
-
+Console.Title = "Shopping Basket";
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
