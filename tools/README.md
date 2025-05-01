@@ -1,0 +1,1 @@
+winget install --id paolosalvatori.ServiceBusExplorer --source winget
