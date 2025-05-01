@@ -37,6 +37,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eventick.Gateway.WebBff", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eventick.Client", "Eventick.Client\Eventick.Client.csproj", "{54B64179-D670-ECB0-AA0A-B0641E92A1EB}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{2793170A-8136-440F-A4F3-5BAB900898F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eventick.Services.Discount.Tests", "Eventick.Services.Discount.Tests\Eventick.Services.Discount.Tests.csproj", "{F0A74BDF-7ABC-4C73-A1D6-267842D5899E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +91,10 @@ Global
 		{54B64179-D670-ECB0-AA0A-B0641E92A1EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54B64179-D670-ECB0-AA0A-B0641E92A1EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{54B64179-D670-ECB0-AA0A-B0641E92A1EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0A74BDF-7ABC-4C73-A1D6-267842D5899E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0A74BDF-7ABC-4C73-A1D6-267842D5899E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0A74BDF-7ABC-4C73-A1D6-267842D5899E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0A74BDF-7ABC-4C73-A1D6-267842D5899E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -103,6 +111,7 @@ Global
 		{FF33F1D3-B441-4A25-848D-CBC3D75A6B10} = {9D7FD798-62AA-4B3F-BB77-B6F8891F45DF}
 		{70021B9B-25C0-4359-BED3-5F97C5A69BB8} = {9D7FD798-62AA-4B3F-BB77-B6F8891F45DF}
 		{54B64179-D670-ECB0-AA0A-B0641E92A1EB} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{F0A74BDF-7ABC-4C73-A1D6-267842D5899E} = {2793170A-8136-440F-A4F3-5BAB900898F1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5719889A-D0AD-4520-804C-CE0B79AA2804}
