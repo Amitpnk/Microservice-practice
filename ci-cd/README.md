@@ -77,11 +77,22 @@ az servicebus topic subscription create \
   --topic-name orderpaymentupdatedmessage \
   --name sbOrderPaymentUpdatedSubscription
 ```
-Verification Commands
+
+- Verification Commands
 ```
 az servicebus topic list --namespace-name sb-eventick-dev-001 --resource-group rg-eventick-dev-001
+
+az servicebus topic show --name checkoutmessage --namespace-name sb-eventick-dev-001 --resource-group rg-eventick-dev-001
+az servicebus topic show --name orderpaymentrequestmessage --namespace-name sb-eventick-dev-001 --resource-group rg-eventick-dev-001
+az servicebus topic show --name orderpaymentupdatedmessage --namespace-name sb-eventick-dev-001 --resource-group rg-eventick-dev-001
 ```
 
+- Get connection primary connection string of azure service bus
 ```
-az servicebus topic show --name checkoutmessage --namespace-name sb-eventick-dev-001 --resource-group rg-eventick-dev-001
+az servicebus namespace authorization-rule keys list \
+  --resource-group rg-eventick-dev-001 \
+  --namespace-name sb-eventick-dev-001 \
+  --name RootManageSharedAccessKey \
+  --query primaryConnectionString \
+  --output tsv
 ```
