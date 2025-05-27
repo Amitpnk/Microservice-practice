@@ -1,4 +1,4 @@
-| Service         | Resource     | Method | Endpoint                                              | Port   |
+| Service         | Resource    | Method | Endpoint                                              | Port   |
 |-----------------|-------------|--------|-------------------------------------------------------|--------|
 | EventCatalog    | Category    | GET    | /api/Category                                         | 5000   |
 | EventCatalog    | Event       | GET    | /api/Event                                            | 5000   |
