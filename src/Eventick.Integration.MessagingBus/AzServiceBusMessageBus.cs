@@ -20,15 +20,13 @@ namespace Eventick.Integration.MessagingBus
         private readonly ServiceBusClient _client;
         private readonly ILogger<AzServiceBusMessageBus> _logger;
 
-        public AzServiceBusMessageBus(
-            IOptions<ServiceBusSettings> serviceBusSettings,
-            ILogger<AzServiceBusMessageBus> logger)
+        public AzServiceBusMessageBus(IOptions<ServiceBusSettings> serviceBusSettings, ILogger<AzServiceBusMessageBus> logger)
         {
             if (string.IsNullOrWhiteSpace(serviceBusSettings.Value.ConnectionString))
             {
                 throw new ArgumentException("Service Bus connection string is not configured.", nameof(serviceBusSettings));
             }
-
+            
             _client = new ServiceBusClient(serviceBusSettings.Value.ConnectionString);
             _logger = logger;
         }

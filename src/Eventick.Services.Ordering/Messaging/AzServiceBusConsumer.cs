@@ -3,6 +3,7 @@ using Eventick.Integration.MessagingBus;
 using Eventick.Services.Ordering.Entities;
 using Eventick.Services.Ordering.Messages;
 using Eventick.Services.Ordering.Repositories;
+using Microsoft.Extensions.Options;
 using System.Text;
 using System.Text.Json;
 
@@ -20,21 +21,39 @@ public class AzServiceBusConsumer : IAzServiceBusConsumer
     private readonly ServiceBusProcessor _checkoutMessageProcessor;
     private readonly ServiceBusProcessor _orderPaymentUpdateProcessor;
 
-    public AzServiceBusConsumer(IConfiguration configuration, IMessageBus messageBus, OrderRepository orderRepository)
+    public AzServiceBusConsumer(IConfiguration configuration, IMessageBus messageBus, OrderRepository orderRepository, IOptions<ServiceBusSettings> serviceBusSettings)
     {
         _configuration = configuration;
         _orderRepository = orderRepository;
         _messageBus = messageBus;
 
-        var subscriptionName = _configuration.GetValue<string>("SubscriptionName");
-        var serviceBusConnectionString = _configuration.GetValue<string>("ServiceBusConnectionString");
-        _checkoutMessageTopic = _configuration.GetValue<string>("CheckoutMessageTopic");
+        var checkoutSubscription = _configuration.GetValue<string>("CheckoutMessageSubscription");
+        var orderPaymentRequestSubscription = _configuration.GetValue<string>("OrderPaymentRequestSubscription");
+        var orderPaymentUpdatedSubscription = _configuration.GetValue<string>("OrderPaymentUpdatedSubscription");
+
+        //var serviceBusConnectionString = _configuration.GetValue<string>("ServiceBusConnectionString");
+        var serviceBusConnectionString = serviceBusSettings.Value.ConnectionString;
+
+             _checkoutMessageTopic = _configuration.GetValue<string>("CheckoutMessageTopic");
         _orderPaymentUpdatedMessageTopic = _configuration.GetValue<string>("OrderPaymentUpdatedMessageTopic");
 
-        var client = new ServiceBusClient(serviceBusConnectionString);
 
-        _checkoutMessageProcessor = client.CreateProcessor(_checkoutMessageTopic, subscriptionName, new ServiceBusProcessorOptions());
-        _orderPaymentUpdateProcessor = client.CreateProcessor(_orderPaymentUpdatedMessageTopic, subscriptionName, new ServiceBusProcessorOptions());
+
+        var client = new ServiceBusClient(serviceBusConnectionString);
+        _checkoutMessageProcessor = client.CreateProcessor(_checkoutMessageTopic, checkoutSubscription, new ServiceBusProcessorOptions());
+        _orderPaymentUpdateProcessor = client.CreateProcessor(_orderPaymentUpdatedMessageTopic, orderPaymentUpdatedSubscription, new ServiceBusProcessorOptions());
+
+     
+
+        //var subscriptionName = _configuration.GetValue<string>("SubscriptionName");
+        //var serviceBusConnectionString = _configuration.GetValue<string>("ServiceBusConnectionString");
+        //_checkoutMessageTopic = _configuration.GetValue<string>("CheckoutMessageTopic");
+        //_orderPaymentUpdatedMessageTopic = _configuration.GetValue<string>("OrderPaymentUpdatedMessageTopic");
+
+        //var client = new ServiceBusClient(serviceBusConnectionString);
+
+        //_checkoutMessageProcessor = client.CreateProcessor(_checkoutMessageTopic, subscriptionName, new ServiceBusProcessorOptions());
+        //_orderPaymentUpdateProcessor = client.CreateProcessor(_orderPaymentUpdatedMessageTopic, subscriptionName, new ServiceBusProcessorOptions());
     }
 
     public void Start()
@@ -78,6 +97,7 @@ public class AzServiceBusConsumer : IAzServiceBusConsumer
 
         try
         {
+            //todo: check values
             await _messageBus.PublishMessage(orderPaymentRequestMessage, _checkoutMessageTopic);
         }
         catch (Exception e)

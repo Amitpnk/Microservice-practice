@@ -1,5 +1,6 @@
 using Eventick.Integration.MessagingBus;
 using Eventick.Services.Ordering.DbContexts;
+using Eventick.Services.Ordering.Extensions;
 using Eventick.Services.Ordering.Messaging;
 using Eventick.Services.Ordering.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +22,8 @@ services.AddScoped<IOrderRepository, OrderRepository>();
 //Specific DbContext for use from singleton AzServiceBusConsumer
 var optionsBuilder = new DbContextOptionsBuilder<OrderDbContext>();
 optionsBuilder.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+
+services.Configure<ServiceBusSettings>(builder.Configuration.GetSection(ServiceBusSettings.SectionName));
 
 services.AddSingleton(new OrderRepository(optionsBuilder.Options));
 
@@ -62,5 +65,5 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
-
+app.UseAzServiceBusConsumer();
 app.Run();

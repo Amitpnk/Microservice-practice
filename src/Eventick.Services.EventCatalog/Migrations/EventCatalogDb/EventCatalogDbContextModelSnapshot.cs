@@ -135,39 +135,6 @@ namespace Eventick.Services.EventCatalog.Migrations.EventCatalogDb
                             ImageUrl = "/img/mahabharata-musical.jpg",
                             Name = "Mahabharata: The Eternal Epic",
                             Price = 8500
-                        },
-                        new
-                        {
-                            EventId = new Guid("4118670c-60a4-4455-accb-866d330792ba"),
-                            Artist = "National School of Drama",
-                            CategoryId = new Guid("1a58c498-f6fe-4a41-b1ec-bd2f33b1d2b2"),
-                            Date = new DateTime(2025, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Girish Karnad's classic play about the 14th century Sultan Muhammad bin Tughlaq. Hindi adaptation.",
-                            ImageUrl = "/img/tughlaq-play.jpg",
-                            Name = "Tughlaq: The Political Drama",
-                            Price = 2500
-                        },
-                        new
-                        {
-                            EventId = new Guid("f55c5205-3123-49d7-b3c3-4f7d0601abb8"),
-                            Artist = "Ratan Thiyam's Chorus Repertory",
-                            CategoryId = new Guid("1a58c498-f6fe-4a41-b1ec-bd2f33b1d2b2"),
-                            Date = new DateTime(2026, 3, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Powerful rendition of Dharamvir Bharati's Partition-era play. Multiple Sahitya Akademi award winner.",
-                            ImageUrl = "/img/andha-yug.jpg",
-                            Name = "Andha Yug: The Blind Age",
-                            Price = 1800
-                        },
-                        new
-                        {
-                            EventId = new Guid("b4f2acd2-a883-41c3-b179-2eee0ecd232d"),
-                            Artist = "Ranga Shankara",
-                            CategoryId = new Guid("1a58c498-f6fe-4a41-b1ec-bd2f33b1d2b2"),
-                            Date = new DateTime(2025, 11, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Girish Karnad's landmark play exploring identity through Indian folk theatre traditions.",
-                            ImageUrl = "/img/hayavadana.jpg",
-                            Name = "Hayavadana: Experimental Theatre",
-                            Price = 3000
                         });
                 });
 

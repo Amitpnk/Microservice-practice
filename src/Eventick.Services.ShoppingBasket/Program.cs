@@ -25,6 +25,8 @@ services.AddDbContext<ShoppingBasketDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+services.Configure<ServiceBusSettings>(builder.Configuration.GetSection(ServiceBusSettings.SectionName));
+
 services.AddSwaggerGen();
 services.AddControllers();
 

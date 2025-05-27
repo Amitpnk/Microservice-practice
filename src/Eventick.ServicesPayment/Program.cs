@@ -10,6 +10,7 @@ services.AddHostedService<ServiceBusListener>();
 services.AddHttpClient<IExternalGatewayPaymentService, ExternalGatewayPaymentService>(c =>
     c.BaseAddress = new Uri(builder.Configuration["ApiConfigs:ExternalPaymentGateway:Uri"] ?? string.Empty));
 
+services.Configure<ServiceBusSettings>(builder.Configuration.GetSection(ServiceBusSettings.SectionName));
 services.AddSingleton<IMessageBus, AzServiceBusMessageBus>();
 
 services.AddSwaggerGen();
