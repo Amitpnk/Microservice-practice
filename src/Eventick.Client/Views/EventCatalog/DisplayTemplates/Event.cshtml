@@ -1,7 +1,7 @@
 ﻿@model Eventick.Web.Models.Api.Event
 <tr>
     <td>
-        <img class="artistPic" src="@Model.ImageUrl" alt="Artist pic" />
+        <img class="artistPic" src="@Model.ImageUrl" alt="Artist pic"/>
     </td>
     <td>
         @Model.Date.ToShortDateString()
@@ -13,7 +13,7 @@
         @Model.Artist
     </td>
     <td class="bold big">
-        $@Model.Price
+        @Model.Price.ToString("c")
     </td>
     <td>
         <a class="btn-primary" type="button" asp-action="Detail" asp-route-eventId="@Model.EventId">DETAILS</a>

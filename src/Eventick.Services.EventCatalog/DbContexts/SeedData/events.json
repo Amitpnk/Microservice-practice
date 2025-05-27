@@ -38,35 +38,5 @@
     "Description": "Kathak adaptation of the great epic featuring 100+ artists. Directed by Kathak legend Pt. Birju Maharaj.",
     "ImageUrl": "/img/mahabharata-musical.jpg",
     "CategoryId": "3f2373fa-525b-4118-9cde-c99f8d5a1d38"
-  },
-  {
-    "EventId": "4118670c-60a4-4455-accb-866d330792ba",
-    "Name": "Tughlaq: The Political Drama",
-    "Price": 2500,
-    "Artist": "National School of Drama",
-    "Date": "2025-09-05T00:00:00",
-    "Description": "Girish Karnad's classic play about the 14th century Sultan Muhammad bin Tughlaq. Hindi adaptation.",
-    "ImageUrl": "/img/tughlaq-play.jpg",
-    "CategoryId": "1a58c498-f6fe-4a41-b1ec-bd2f33b1d2b2"
-  },
-  {
-    "EventId": "f55c5205-3123-49d7-b3c3-4f7d0601abb8",
-    "Name": "Andha Yug: The Blind Age",
-    "Price": 1800,
-    "Artist": "Ratan Thiyam's Chorus Repertory",
-    "Date": "2026-03-10T00:00:00",
-    "Description": "Powerful rendition of Dharamvir Bharati's Partition-era play. Multiple Sahitya Akademi award winner.",
-    "ImageUrl": "/img/andha-yug.jpg",
-    "CategoryId": "1a58c498-f6fe-4a41-b1ec-bd2f33b1d2b2"
-  },
-  {
-    "EventId": "b4f2acd2-a883-41c3-b179-2eee0ecd232d",
-    "Name": "Hayavadana: Experimental Theatre",
-    "Price": 3000,
-    "Artist": "Ranga Shankara",
-    "Date": "2025-11-30T00:00:00",
-    "Description": "Girish Karnad's landmark play exploring identity through Indian folk theatre traditions.",
-    "ImageUrl": "/img/hayavadana.jpg",
-    "CategoryId": "1a58c498-f6fe-4a41-b1ec-bd2f33b1d2b2"
   }
 ]

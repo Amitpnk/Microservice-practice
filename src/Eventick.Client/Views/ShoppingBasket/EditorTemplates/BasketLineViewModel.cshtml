@@ -3,7 +3,7 @@
 <tr>
     <td>@Model.EventName</td>
     <td>@Model.Date.DateTime.ToShortDateString()</td>
-    <td class="bold">$@Model.Price</td>
+    <td class="bold">@Model.Price.ToString("c")</td>
     <td>
         <form asp-action="UpdateLine">
             <input type="hidden" name="LineId" value="@Model.LineId" />
@@ -14,10 +14,10 @@
                 <option value="4">4</option>
                 <option value="5">5</option>
             </select>
-            <button type="submit" class="filterButton">Update</button>
+            <button type="submit" class="filterButton">Update -amit</button>
         </form>
     </td>
-    <td class="bold big">$@(Model.Price * Model.Quantity) </td>
+    <td class="bold big">@(Model.Price * Model.Quantity).ToString("c") </td>
     <td>
         <a asp-action="RemoveLine" asp-route-lineId="@Model.LineId">
             <img class="cancelIcon" src="~/img/times.svg" />
